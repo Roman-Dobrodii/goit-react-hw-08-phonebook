@@ -1,15 +1,13 @@
-import React, { Component } from "react";
-import { CSSTransition } from "react-transition-group";
-import { connect } from "react-redux";
-//import contactsActions from "../../redux/contact/contact-actions";
-import contactsOperation from "../../redux/contact/contactsOperation";
-
-import contactSelectors from "../../redux/contact/contact-selectors";
+import React, { Component } from 'react';
+import { CSSTransition } from 'react-transition-group';
+import { connect } from 'react-redux';
+import contactsOperation from '../../redux/contact/contactsOperation';
+import contactSelectors from '../../redux/contact/contact-selectors';
 
 class ContactForm extends Component {
   formInitialState = {
-    name: "",
-    number: "",
+    name: '',
+    number: '',
   };
   state = {
     ...this.formInitialState,
@@ -20,20 +18,18 @@ class ContactForm extends Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = (evt) => {
+  handleSubmit = evt => {
     evt.preventDefault();
     const { name, number } = this.state;
 
     const { contacts } = this.props;
-    const existedContact = contacts.find((contact) => contact.name === name);
+    const existedContact = contacts.find(contact => contact.name === name);
     if (existedContact) {
       this.setState({ alertMessageShow: true });
-      // alert(`${name} is already in contacts`);
       return this.setState({ ...this.formInitialState });
     }
-    console.log("name", name);
     this.props.onAddContact(name, number);
-    this.setState({ name: "", number: "" });
+    this.setState({ name: '', number: '' });
   };
   toggleAlert = () => {
     this.setState({ alertMessageShow: false });
@@ -55,7 +51,6 @@ class ContactForm extends Component {
         </CSSTransition>
         <form onSubmit={this.handleSubmit} className="form">
           <label>
-            {/* Name */}
             <input
               className="input"
               type="text"
@@ -66,7 +61,6 @@ class ContactForm extends Component {
             ></input>
           </label>
           <label>
-            {/* Number */}
             <input
               className="input"
               type="tel"
@@ -85,7 +79,7 @@ class ContactForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   contacts: contactSelectors.getContacts(state),
   filter: contactSelectors.getFilter(state),
 });

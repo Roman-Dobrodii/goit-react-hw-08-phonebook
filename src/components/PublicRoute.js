@@ -1,8 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
-//import routesInfo from "../routes";
-import { Route, Redirect } from "react-router-dom";
-//import routes from "./utils/utils";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Route, Redirect } from 'react-router-dom';
 
 const PublicRoute = ({
   component: MyComponent,
@@ -13,7 +11,7 @@ const PublicRoute = ({
 }) => (
   <Route
     {...routeProps}
-    render={(props) =>
+    render={props =>
       token && routeProps.restricted ? (
         <Redirect to={redirectTo} />
       ) : (
@@ -23,9 +21,8 @@ const PublicRoute = ({
   />
 );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   token: state.auth.token,
 });
 
 export default connect(mapStateToProps)(PublicRoute);
-// && routesInfo.restricted

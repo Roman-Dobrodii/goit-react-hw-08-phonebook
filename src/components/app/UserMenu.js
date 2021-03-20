@@ -1,8 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import authOperations from "../../redux/auth/authOperations";
-// import user from "../../image/pngegg.png";
-import user from "../../image/avatar.png";
+import React from 'react';
+import { connect } from 'react-redux';
+import authOperations from '../../redux/auth/authOperations';
+import user from '../../image/avatar.png';
 
 const UserMenu = ({ name, avatar, logout }) => {
   return (
@@ -11,12 +10,6 @@ const UserMenu = ({ name, avatar, logout }) => {
         <div className="userMenu-avatar">
           <img
             className="userMenu-avatar_img"
-            // className="userMenu-wrapper"
-            // style={{
-            //   borderRadius: "50%",
-            //   backgroundImage: "url('../../image/pngegg.png",
-            // }}
-            // className="userMenu-avatar"
             src={avatar}
             alt={name}
             width="32"
@@ -31,11 +24,11 @@ const UserMenu = ({ name, avatar, logout }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   name: state.auth.user.name,
   avatar: user,
 });
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(authOperations.logout()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(UserMenu);

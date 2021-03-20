@@ -1,7 +1,6 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
-//import routes from "./utils/utils";
-import { connect } from "react-redux";
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const PrivateRoute = ({
   component: MyComponent,
@@ -11,12 +10,12 @@ const PrivateRoute = ({
 }) => (
   <Route
     {...routeProps}
-    render={(props) =>
+    render={props =>
       token ? <MyComponent {...props} /> : <Redirect to={redirectTo} />
     }
   />
 );
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   token: state.auth.token,
 });
 

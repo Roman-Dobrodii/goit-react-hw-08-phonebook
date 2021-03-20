@@ -17,9 +17,7 @@ class LoginView extends Component {
   };
   handleSubmit = evt => {
     evt.preventDefault();
-    //const { email, password } = this.state;
-    this.props.onLogin(this.state);
-    //this.setState({...this.loginInitialState})
+    this.props.onLogin({ ...this.state });
   };
   render() {
     const { email, password } = this.state;
@@ -29,7 +27,6 @@ class LoginView extends Component {
           <h1>Login page</h1>
           <form onSubmit={this.handleSubmit} className="form">
             <label>
-              {/* Email */}
               <input
                 className="input"
                 type="text"
@@ -40,7 +37,6 @@ class LoginView extends Component {
               ></input>
             </label>
             <label>
-              {/* Password */}
               <input
                 className="input"
                 type="password"
@@ -59,8 +55,4 @@ class LoginView extends Component {
     );
   }
 }
-
-const mapDispatchToProps = {
-  onLogin: authOperations.login,
-};
-export default connect(null, mapDispatchToProps)(LoginView);
+export default connect(null, { onLogin: authOperations.login })(LoginView);

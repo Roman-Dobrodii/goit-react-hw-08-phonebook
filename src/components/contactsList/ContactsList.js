@@ -1,19 +1,12 @@
-import React from "react";
-import ContactsListItems from "../contactListItems/ContactsListItems";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { connect } from "react-redux";
-import contactSelectors from "../../redux/contact/contact-selectors";
-//import contactActions from "../../redux/contact/contact-actions";
+import React from 'react';
+import ContactsListItems from '../contactListItems/ContactsListItems';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { connect } from 'react-redux';
+import contactSelectors from '../../redux/contact/contact-selectors';
 
-const ContactsList = ({
-  items,
-  contacts,
-  // deleteContact
-}) => {
-  // render() {
-  //   const { contacts, deleteContact } = this.props;
+const ContactsList = ({ items, contacts }) => {
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
       {contacts.length > 0 && items.length === 0 ? (
         <h4>...Nothing Found</h4>
       ) : (
@@ -25,12 +18,7 @@ const ContactsList = ({
               timeout={250}
               unmountOnExit
             >
-              <ContactsListItems
-                // contact={contact}
-                // key={id}
-                id={id}
-                //deleteContact={() => deleteContact(id)}
-              />
+              <ContactsListItems id={id} />
             </CSSTransition>
           ))}
         </TransitionGroup>
@@ -39,16 +27,8 @@ const ContactsList = ({
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const getFilteredContact = contactSelectors.getContactsFiltered(state);
-  // const { items, filter } = state.contacts;
-  // const normalizedFilter = filter.toLowerCase();
-
-  // const getFilteredContact = items.filter((contact) =>
-  //   contact.name.toLowerCase().includes(normalizedFilter)
-  // );
-  // console.log("getFilteredContact", getFilteredContact);
-  console.log("items", getFilteredContact);
   return {
     items: getFilteredContact,
     contacts: contactSelectors.getContacts(state),

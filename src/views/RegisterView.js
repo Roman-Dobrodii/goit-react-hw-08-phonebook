@@ -12,9 +12,8 @@ class RegisterView extends Component {
     this.setState({ [name]: value });
   };
   handleSubmit = evt => {
-    //const { name, email, password } = this.state;
     evt.preventDefault();
-    this.props.onRegister(this.state);
+    this.props.onRegister({ ...this.state });
     this.setState({ name: '', email: '', password: '' });
   };
   render() {
@@ -23,20 +22,9 @@ class RegisterView extends Component {
     return (
       <div className="container">
         <section className="wrapper">
-          {/* <CSSTransition
-        in={alertMessageShow}
-        timeout={250}
-        classNames="alertFade"
-        unmountOnExit
-      > */}
-          {/* <button className="alertMessage" onClick={this.toggleAlert}>
-          <p>Contact already exists</p>
-        </button> */}
-          {/* </CSSTransition> */}
           <h1>Register form</h1>
           <form onSubmit={this.handleSubmit} className="form">
             <label>
-              {/* Name */}
               <input
                 className="input"
                 type="text"
@@ -47,7 +35,6 @@ class RegisterView extends Component {
               ></input>
             </label>
             <label>
-              {/* Email */}
               <input
                 className="input"
                 type="email"
@@ -58,7 +45,6 @@ class RegisterView extends Component {
               ></input>
             </label>
             <label>
-              {/* Password */}
               <input
                 className="input"
                 type="password"
@@ -78,8 +64,6 @@ class RegisterView extends Component {
   }
 }
 
-const mapDispatchToProps = {
-  onRegister: authOperations.register,
-};
-
-export default connect(null, mapDispatchToProps)(RegisterView);
+export default connect(null, { onRegister: authOperations.register })(
+  RegisterView,
+);
