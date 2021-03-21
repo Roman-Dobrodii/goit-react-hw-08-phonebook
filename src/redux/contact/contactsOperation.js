@@ -3,22 +3,36 @@ import axios from 'axios';
 import { token } from '../auth/authOperations';
 
 axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com';
+
 const addContact = (name, number) => dispatch => {
+  const contact = {
+    name,
+    number,
+  };
+
   dispatch(contactsActions.addContactRequest());
 
   axios
-    .post('/contacts', { name, number })
-    .then(response => {
-      dispatch(
-        contactsActions.addContactSuccess({
-          name,
-          number,
-          id: response.data.name,
-        }),
-      );
-    })
-    .catch(error => dispatch(contactsActions.addContactError(error)));
+    .post('/contacts', contact)
+    .then(({ data }) => dispatch(contactsActions.addContactSuccess(data)))
+    .catch(error => dispatch(contactsActions.addContactError(error.message)));
 };
+// const addContact = (name, number) => dispatch => {
+//   dispatch(contactsActions.addContactRequest());
+
+//   axios
+//     .post('/contacts', { name, number })
+//     .then(response => {
+//       dispatch(
+//         contactsActions.addContactSuccess({
+//           name,
+//           number,
+//           id: response.data.name,
+//         }),
+//       );
+//     })
+//     .catch(error => dispatch(contactsActions.addContactError(error)));
+// };
 
 const fetchContacts = () => (dispatch, getState) => {
   dispatch(contactsActions.fetchContactsRequest());
